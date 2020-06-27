@@ -1,0 +1,32 @@
+{
+  "name": "receiptkeeper",
+  "version": "1.0.0",
+  "description": "Web App for keeping receipts",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WMichael/ReceiptKeeper.git"
+  },
+  "author": "Michael Weller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WMichael/ReceiptKeeper/issues"
+  },
+  "homepage": "https://github.com/WMichael/ReceiptKeeper#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.1",
+    "mongoose": "^5.9.19",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
