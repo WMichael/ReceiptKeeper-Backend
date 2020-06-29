@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { ReceiptApi } from './../../api/ReceiptAPI';
 
 class NewReceipt extends React.Component {
     constructor(props){
@@ -22,18 +23,12 @@ class NewReceipt extends React.Component {
     }
 
     saveReceipt() {
-        fetch(`${process.env.REACT_APP_API}/receipts/add`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name : this.state.name,
-                description : this.state.description,
-                image_url : this.state.image_url,
-                price: this.state.price,
-                purchase_date: this.state.purchase_date
-            })
+        ReceiptApi.save({
+            name : this.state.name,
+            description : this.state.description,
+            image_url : this.state.image_url,
+            price: this.state.price,
+            purchase_date: this.state.purchase_date
         }).then(res => {
             console.log("Successfully saved!");
             this.props.fetchReceipts();

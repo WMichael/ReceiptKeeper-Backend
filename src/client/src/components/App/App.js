@@ -2,6 +2,7 @@ import React from 'react';
 import Receipt from '../Receipt/Receipt'
 import './App.scss';
 import NewReceipt from './../NewReceipt/NewReceipt';
+import { ReceiptApi } from './../../api/ReceiptAPI';
 
 class App extends React.Component {
   
@@ -18,17 +19,13 @@ class App extends React.Component {
   }
 
   fetchReceipts() {
-    fetch(`${process.env.REACT_APP_API}/receipts`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            receipts : result.sort((a,b) => {
-              return new Date(b.purchase_date) - new Date(a.purchase_date)
-            })
-          });
-        }
-      );
+    ReceiptApi.all().then(result => {
+      this.setState({
+        receipts : result.sort((a,b) => {
+          return new Date(b.purchase_date) - new Date(a.purchase_date)
+        })
+      });  
+    });
   }
 
   newReceiptToggle() {

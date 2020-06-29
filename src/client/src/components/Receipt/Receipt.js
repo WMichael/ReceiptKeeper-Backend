@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { ReceiptApi } from './../../api/ReceiptAPI';
 
 class Receipt extends React.Component {
 
@@ -32,9 +33,7 @@ class Receipt extends React.Component {
 
     deleteReceipt() {
         if(window.confirm(`Are you sure you want to permanently delete ${this.state.name}?`)) {
-            fetch(`${process.env.REACT_APP_API}/receipts/${this.state.receipt_id}`, {
-                method: 'DELETE',
-            }).then(res => {
+           ReceiptApi.delete(this.state.receipt_id).then(res => {
                 console.log("Successfully deleted!");
                 this.props.fetchReceipts();
             }).catch(err => {
@@ -45,18 +44,12 @@ class Receipt extends React.Component {
 
     saveReceipt() {
         this.switchMode();
-        fetch(`${process.env.REACT_APP_API}/receipts/${this.state.receipt_id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-type' : 'application/json'
-            },
-            body: JSON.stringify({
-                name : this.state.name,
-                description : this.state.description,
-                image_url : this.state.image_url,
-                price: this.state.price,
-                purchase_date: this.state.purchase_date
-            })
+        ReceiptApi.update(this.state.receipt_id, {
+            name : this.state.name,
+            description : this.state.description,
+            image_url : this.state.image_url,
+            price: this.state.price,
+            purchase_date: this.state.purchase_date
         }).then(res => {
             console.log("Successfully updated!");
             this.props.fetchReceipts();
