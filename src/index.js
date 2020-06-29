@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const ReceiptRouter = require('./Routes/receipt.router');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(morgan("common"));
 app.use(helmet())
 app.use(express.json());
 app.use('/receipts', ReceiptRouter);
+app.use(express.static(path.join(__dirname, 'build')));
 const port = process.env.PORT || 8081;
 
 mongoose.connect(process.env.DB, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
@@ -23,10 +25,8 @@ db.once('open', () => {
     app.listen(port, () => console.log(`Listening at localhost:${port} 🎉`));
 });    
 
-app.get('/', (req,res,next) => {
-    res.send({
-        message: "ReceiptKeeper! 🧾"
-    });   
+app.get('/*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });    
 
 // Error handling
