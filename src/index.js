@@ -14,7 +14,7 @@ app.use(morgan("common"));
 app.use(helmet())
 app.use(express.json());
 app.use('/receipts', ReceiptRouter);
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 const port = process.env.PORT || 8081;
 
 mongoose.connect(process.env.DB, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
@@ -26,7 +26,7 @@ db.once('open', () => {
 });    
 
 app.get('/*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });    
 
 // Error handling
