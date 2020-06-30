@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const ReceiptRouter = require('./Routes/receipt.router');
+const UserRouter = require('./Routes/user.router');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
@@ -14,6 +15,7 @@ app.use(morgan("common"));
 app.use(helmet())
 app.use(express.json());
 app.use('/receipts', ReceiptRouter);
+app.use('/users', UserRouter);
 app.use(express.static(path.join(__dirname, 'client/build')));
 const port = process.env.PORT || 8081;
 
