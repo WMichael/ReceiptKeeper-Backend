@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "build": "npm run build --prefix src/client",
+    "build": "npm install --prefix src/client && npm run build --prefix src/client",
     "dev": "nodemon src/index.js"
   },
   "repository": {
