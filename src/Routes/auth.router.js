@@ -10,16 +10,22 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
 function(req, res) {
-    res.redirect(`${API_URL}/profile`);
+    res.redirect(`${API_URL}/`);
 }); 
+
+router.get('logout', (req,res) => {
+    req.logout();
+    // res.redirect(`${API_URL}/`);
+});
 
 // Check user is logged in
 router.get('/', (req, res) => {
     if(req.user) {
-        res.status(200);
+        res.sendStatus(200);
     } else {
-        res.status(401);
+        res.sendStatus(401);
     }
 });
+
 
 module.exports = router;

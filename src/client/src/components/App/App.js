@@ -4,6 +4,7 @@ import './App.scss';
 import NewReceipt from './../NewReceipt/NewReceipt';
 import { ReceiptApi } from './../../api/ReceiptAPI';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {AuthAPI} from '../../api/AuthAPI';
 
 class App extends React.Component {
   
@@ -12,6 +13,7 @@ class App extends React.Component {
     this.state = {
       loaded: false,
       newReceipt: false,
+      loggedIn: false,
       receipts: []
     }
 
@@ -37,25 +39,40 @@ class App extends React.Component {
   }
 
   componentDidMount() { 
-    this.fetchReceipts();
+    AuthAPI.loggedIn().then(res => {
+      this.setState({
+        loggedIn: res,
+        loaded: true
+      })
+    })
   }
 
   render() {
     const receipts = this.state.receipts.map(item =>
       <Receipt key={item._id} receipt={item} fetchReceipts={this.fetchReceipts}></Receipt>
       );
+
+    let nav = "";
+    if(this.state.loaded) { 
+        nav = <nav>
+      <Link to="/"><button type="button" className="navButton">Home</button></Link>
+      <Link to="/about"><button type="button" className="navButton">About</button></Link>
+      {!this.state.loggedIn ? <Link to="/login"><button type="button" className="navButton">Login</button></Link> : 
+      <>
+        <button type="button" className="navButton" onClick={this.newReceiptToggle}>New Receipt</button>
+        <Link to="/profile"><button type="button" className="navButton">Profile</button></Link>
+        <a href={`${this.API_URL}/auth/logout`}><button type="button" className="navButton">Logout</button></a>      
+      </>
+      }
+    </nav>;
+    }
+
     // TODO: seperate contents of each route into a seperate component
     return (
       <Router>
         <div className="App">
           <h1>Receipt Keeper <span role='img' aria-label='Receipt'>🧾</span> </h1>
-          <nav>
-            <Link to="/"><button type="button" className="navButton">Home</button></Link>
-            <button type="button" className="navButton" onClick={this.newReceiptToggle}>New Receipt</button>
-            <Link to="/about"><button type="button" className="navButton">About</button></Link>
-            <Link to="/profile"><button type="button" className="navButton">Profile</button></Link>
-            <a href={`${this.API_URL}/auth/google`}><button type="button" className="navButton">Login with Google</button></a>
-          </nav>
+          {nav}
         </div>
 
         <Switch>
@@ -68,6 +85,10 @@ class App extends React.Component {
           </Route>
           <Route exact path="/profile">
             <h2>Profile page</h2>
+          </Route>
+          <Route exact path="/login">
+            <h2>User not logged in!</h2>
+            <a href={`${this.API_URL}/auth/google`}><button type="button" className="navButton">Login with Google</button></a>
           </Route>
         </Switch>
       </Router>
