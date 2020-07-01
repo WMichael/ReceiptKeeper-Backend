@@ -1,0 +1,20 @@
+@import "theme.scss";
+
+.container {
+    background-color: $secondary-colour;
+    color: white;
+    width: 500px;
+    max-width: 500px;
+    padding: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    display: block;
+    min-height: 175px;
+}
+
+.info {
+    text-align: center;
+    color: white;
+}

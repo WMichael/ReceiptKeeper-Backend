@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/receipt.scss';
+import '../../styles/main.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
@@ -72,7 +73,7 @@ class Receipt extends React.Component {
 
     render() {
         return(
-            <div className="receiptContainer">
+            <div className="container">
                 <h1>{this.state.name}</h1>
                 <div className="actions">
                     <span id="save" hidden={!this.state.editMode} role="img" aria-label="save" onClick={this.saveReceipt}><FontAwesomeIcon className="icon" icon={faCheck}/></span>

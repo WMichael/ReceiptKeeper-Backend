@@ -38,7 +38,7 @@ const port = process.env.PORT || 8081;
 
 // Routes
 app.use('/receipts', ReceiptRouter);
-app.use('/users', UserRouter);
+app.use('/user', UserRouter);
 app.use('/auth', AuthRouter);
 
 // Connect to DB

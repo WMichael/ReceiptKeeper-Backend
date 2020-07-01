@@ -2,6 +2,8 @@ import React from 'react';
 import Receipt from '../Receipt/Receipt'
 import './App.scss';
 import NewReceipt from './../NewReceipt/NewReceipt';
+import About from './../About/About';
+import Profile from './../Profile/Profile';
 import { ReceiptApi } from './../../api/ReceiptAPI';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {AuthAPI} from '../../api/AuthAPI';
@@ -43,7 +45,8 @@ class App extends React.Component {
       this.setState({
         loggedIn: res,
         loaded: true
-      })
+      });
+      this.fetchReceipts();
     })
   }
 
@@ -81,14 +84,16 @@ class App extends React.Component {
               {receipts}
           </Route>
           <Route exact path="/about">
-            <h2>About page</h2>
+            <About></About>
           </Route>
           <Route exact path="/profile">
-            <h2>Profile page</h2>
+            <Profile></Profile>
           </Route>
           <Route exact path="/login">
-            <h2>User not logged in!</h2>
-            <a href={`${this.API_URL}/auth/google`}><button type="button" className="navButton">Login with Google</button></a>
+            <div className="login">
+              <h2>User not logged in!</h2>
+              <a href={`${this.API_URL}/auth/google`}><button type="button" className="navButton">Login with Google</button></a>
+            </div>
           </Route>
         </Switch>
       </Router>
