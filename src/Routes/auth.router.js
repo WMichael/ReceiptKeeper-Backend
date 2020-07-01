@@ -13,9 +13,9 @@ function(req, res) {
     res.redirect(`${API_URL}/`);
 }); 
 
-router.get('logout', (req,res) => {
-    req.logout();
-    // res.redirect(`${API_URL}/`);
+router.get('/logout', (req,res) => {
+    req.logOut();
+    res.redirect(`${API_URL}/`);
 });
 
 // Check user is logged in
