@@ -1,8 +1,9 @@
 const express = require('express');
 const ReceiptModel = require('../Models/receipt.model');
 const router = express.Router();
+const authCheck = require('../helpers/AuthCheck');
 
-router.get('/', (req,res,next) => {
+router.get('/', authCheck, (req,res,next) => {
     ReceiptModel.find().exec((err, result) => {
         if(err) {
             next({});

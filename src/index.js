@@ -8,8 +8,8 @@ const UserRouter = require('./Routes/user.router');
 const AuthRouter = require('./Routes/auth.router');
 const cors = require('cors');
 const path = require('path');
-const passport = require('passport');
 const cookieSession = require('cookie-session');
+const passport = require('passport');
 require('dotenv').config();
 require('./config/passport-setup');
 
@@ -21,7 +21,10 @@ app.use(cookieSession({
     keys: [process.env.COOKIE_KEY]
 }));
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(morgan("common"));
 app.use(helmet())
 app.use(express.json());
