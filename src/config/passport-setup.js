@@ -1,18 +1,16 @@
 const { eventNames } = require('../Schemas/user.schema');
-
 const passport = require('passport');
+const UserModel=require('../Models/user.model');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.serializeUser(function(user, done) {
-    // TODO: return user.id instead. Once two implementations below are complete.
-    done(null, user);
-  });
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
   
-passport.deserializeUser(function(user, done) {
-    // TODO: change parameter user to id & find user object in DB.
-    // User.findById(id, function(err, user) {
-        done(null, user);
-    // });
+passport.deserializeUser((id, done) => {
+  UserModel.findById(id).then((user) => {
+    done(null, user.id);
+  });
 });
 
 passport.use(new GoogleStrategy({
@@ -21,8 +19,21 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
-    // Use profile id to check if user exists in db or not.
-    // TODO: Check if user exists or create user in DB.
-    return done(null, profile);
+    //Check if user already exists in DB
+    UserModel.findOne({googleid: profile.id}).then((currentUser) => {
+      if(currentUser) {
+        console.log(`User is: `, currentUser.username);
+        done(null, currentUser);
+      } else {
+        new UserModel({
+          username: profile.displayName,
+          googleid: profile.id
+        }).save().then((newUser) => {
+          console.log(`New user created: ${newUser}`);
+          done(null, newUser);
+        });
+      }
+    });
+
   }
 ));
