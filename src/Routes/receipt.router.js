@@ -8,33 +8,32 @@ router.get('/', AuthCheck.loggedIn, (req,res,next) => {
         if(err) {
             next({});
         } else {
-            console.log(result);
             res.send(result);
         }
     });
 });
 
-router.get('/:id', (req, res, next) => {
-    ReceiptModel.findById(req.params.id).exec((err, result) => {
-        if(err) {
-            next({});
-        } else {
-            res.send(result);
-        }
-    })
-});
-
-router.put('/:id', (req, res, next) => {
-    ReceiptModel.findOneAndUpdate({'_id': req.params.id}, req.body, (err, doc) => {
+router.put('/:id', AuthCheck.loggedIn, (req, res, next) => {
+    ReceiptModel.findOne({'_id': req.params.id}, (err, result) => {
         if (err) {
             next({});
         } else {
-            res.json({"message" : "Receipt has been updated!"});
+            if(AuthCheck.authCheck(req.user, result.user)) {
+                result.update(req.body, (err) => {
+                    if (err) {
+                        next({});        
+                    } else {
+                        res.json({"message" : "Receipt has been updated!"});
+                    }
+                });
+            } else {
+                res.sendStatus(401);
+            }
         }
     });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', AuthCheck.loggedIn, (req, res, next) => {
     ReceiptModel.findByIdAndDelete({'_id': req.params.id}, (err) => {
         if (err) {
             next({});
@@ -44,7 +43,7 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
-router.post('/add', (req, res, next) => {
+router.post('/add', AuthCheck.loggedIn, (req, res, next) => {
     const receipt = new ReceiptModel({
         name: req.body.name,
         description: req.body.description,

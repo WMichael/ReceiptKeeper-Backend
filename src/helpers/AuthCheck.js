@@ -1,4 +1,5 @@
-// Checks if user is logged in
+const UserModel = require('../Models/user.model');
+const e = require('express');
 
 AuthCheck = {
     loggedIn: (req,res,next) => {
@@ -8,8 +9,9 @@ AuthCheck = {
             res.status(401).send("Not logged in");
         }
     },
-    authCheck: (requesterID, requestedID) => { 
-        return true;
+    authCheck: (requesterID, idToCheck) => { 
+       // TODO: Sort out auth check
+       return true;
     }
 } 
 module.exports = AuthCheck;
