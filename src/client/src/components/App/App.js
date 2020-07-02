@@ -6,7 +6,7 @@ import Profile from './../Profile/Profile';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {AuthAPI} from '../../api/AuthAPI';
 
-class App extends React.Component {
+export default class App extends React.Component {
   
   constructor(props) {
     super(props);
@@ -78,5 +78,3 @@ class App extends React.Component {
     } else return (<></>);
   }
 }
-
-export default App;

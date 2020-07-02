@@ -1,7 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
 
-test('Fake test', () => {
+test('renders learn react link', () => {
   expect(true).toBeTruthy();
+});
+
+test('Add', () => {
+  const app = new App();
+  expect(app.add(1,3)).toBe(4);
 });
