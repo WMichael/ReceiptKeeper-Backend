@@ -1,6 +1,5 @@
 const API_URL = process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API;
 
-
 // TODO: Catch errors
 export const AuthAPI = {
     loggedIn: () => {
@@ -10,8 +9,6 @@ export const AuthAPI = {
             } else {
                 return false;
             }
-        }).catch(() => {
-            return false;
-        })
+        });
     }
 }

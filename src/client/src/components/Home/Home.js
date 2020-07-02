@@ -55,7 +55,7 @@ class Home extends React.Component {
             {this.props.loggedIn ? <div className="subActions"><button type="button" className="navButton" onClick={this.newReceiptToggle}>New Receipt</button></div> 
             : this.props.loaded ? initialInfo : ''}
             {this.state.newReceipt ? <NewReceipt newReceiptToggle={this.newReceiptToggle} fetchReceipts={this.fetchReceipts}></NewReceipt> : ''}
-            {receipts});
+            {receipts}
             </>
         );
     }

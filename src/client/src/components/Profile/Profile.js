@@ -19,6 +19,8 @@ class Profile extends React.Component {
                 receipts: res.receipts,
                 loaded: true
             });
+        }).catch((err) => {
+            throw err;
         });
     }
 
