@@ -4,7 +4,7 @@
   "description": "Web App for keeping receipts",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node src/index.js",
     "build": "npm install --prefix src/client && npm run build --prefix src/client",
     "dev": "nodemon src/index.js"
@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/WMichael/ReceiptKeeper#readme",
   "dependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -32,6 +35,8 @@
     "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.10.4",
+    "jest": "^26.1.0",
     "nodemon": "^2.0.4"
   }
 }
