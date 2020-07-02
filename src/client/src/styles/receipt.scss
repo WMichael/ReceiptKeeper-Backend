@@ -9,7 +9,7 @@
 }
 
 .actions a:link, a:visited, a:hover, a:active {
-    color: white;
+    color: $text-colour;
 }
 
 .actions span {
@@ -46,4 +46,5 @@
 
 h1 { 
     display: inline;
+    padding: 15px;
 }

@@ -11,12 +11,14 @@ export const ReceiptApi = {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: "include"
         }).then(res => res.json());
     },
     delete: (id) => {
         return fetch(`${API_URL}/receipts/${id}`, {
             method: 'DELETE',
+            credentials: "include"
         }).then(res => res.json());
     },
     update: (id, body) => {
@@ -25,7 +27,8 @@ export const ReceiptApi = {
             headers: {
                 'Content-type' : 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: "include"
         }).then(res => res.json());
     }
 }

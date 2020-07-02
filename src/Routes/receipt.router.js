@@ -1,13 +1,14 @@
 const express = require('express');
 const ReceiptModel = require('../Models/receipt.model');
 const router = express.Router();
-const authCheck = require('../helpers/AuthCheck');
+const AuthCheck = require('../helpers/AuthCheck');
 
-router.get('/', authCheck, (req,res,next) => {
-    ReceiptModel.find().exec((err, result) => {
+router.get('/', AuthCheck.loggedIn, (req,res,next) => {
+    ReceiptModel.find({user: req.user}).exec((err, result) => {
         if(err) {
             next({});
         } else {
+            console.log(result);
             res.send(result);
         }
     });
@@ -44,7 +45,14 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.post('/add', (req, res, next) => {
-    const receipt = new ReceiptModel(req.body);
+    const receipt = new ReceiptModel({
+        name: req.body.name,
+        description: req.body.description,
+        image_url: req.body.image_url,
+        price: req.body.price,
+        purchase_date: req.body.purchase_date,
+        user: req.user
+    });
     receipt.save().then(() => {
         res.send({message: "Receipt Added! 🧾🎉"});
     }).catch(() => {

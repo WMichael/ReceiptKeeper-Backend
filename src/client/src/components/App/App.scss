@@ -24,7 +24,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $text-colour;
 }
 
 .App-link {
@@ -42,7 +42,7 @@
 
 .navButton {
   background-color: $secondary-colour;
-  color: white;
+  color: $text-colour;
   border: 2px solid $secondary-colour;
   font-size: 1em;
   padding: 0.5em;
@@ -65,4 +65,10 @@
 
 nav {
   margin: 15px;
+  height: 35px;
+}
+
+.subActions {
+  text-align: center;
+  padding-bottom: 8px;
 }
