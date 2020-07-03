@@ -1,10 +1,29 @@
+import React from 'react';
 import App from './App';
+import {shallow} from 'enzyme';
+let wrapper;
 
-test('renders learn react link', () => {
-  expect(true).toBeTruthy();
-});
+describe('<App>', () => {
 
-test('Add', () => {
-  const app = new App();
-  expect(app.add(1,3)).toBe(4);
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+
+  it('Renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('Failed to Communicate message showing when authError', () => {
+    wrapper.setState({
+      authError: true
+    });
+    expect(wrapper.contains(<h2>Failed to communicate with the backend.</h2>)).toBeTruthy();
+  })
+
+  it('Show correct links when logged in', () => {
+    wrapper.setState({
+      loggedIn: true
+    });
+    expect(wrapper.find('#homeButton')).toBeTruthy();
+  })
 });
