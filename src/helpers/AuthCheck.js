@@ -8,8 +8,12 @@ AuthCheck = {
             res.status(401).send("Not logged in");
         }
     },
-    authCheck: (requesterID, requestedID) => { 
-        return true;
+    authCheck: (requester, requestedID) => {
+        if (requester.role == 'admin') {
+            return true;
+        } else {
+            return requester.id == requestedID;
+        }
     }
 } 
 module.exports = AuthCheck;

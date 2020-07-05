@@ -36,7 +36,7 @@ export default class App extends React.Component {
       const nav = <nav>
       <Link to="/"><button type="button" id="homeButton" className="navButton">Home</button></Link>
       <Link to="/about"><button type="button" id="aboutButton" className="navButton">About</button></Link>
-      {!this.state.loggedIn ? <a id="loginButton" href={`${this.API_URL}/auth/google`}><button type="button" className="navButton">Login with Google</button></a> : 
+      {!this.state.loggedIn ? <a href={`${this.API_URL}/auth/google`}><button type="button" id="loginButton" className="navButton">Login with Google</button></a> : 
       <>
         <Link to="/profile"><button type="button" id="profileButton" className="navButton">Profile</button></Link>
         <a href={`${this.API_URL}/auth/logout`}><button type="button" id="logoutButton" className="navButton">Logout</button></a>      

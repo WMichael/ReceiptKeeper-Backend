@@ -20,7 +20,7 @@ router.get('/logout', (req,res) => {
 
 // Check user is logged in
 router.get('/', (req, res) => {
-    if(req.user) {
+    if(req.user.id) {
         res.sendStatus(200);
     } else {
         res.sendStatus(401);
