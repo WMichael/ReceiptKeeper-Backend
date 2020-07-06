@@ -43,7 +43,7 @@ class Home extends React.Component {
 
         const initialInfo = (
             <div className="container">
-                <div className="info">
+                <div id="infoMsg" className="info">
                     <h2>Welcome</h2>
                     <p>Please login to add & view your receipts!</p>
                 </div>
@@ -52,7 +52,7 @@ class Home extends React.Component {
 
         return(
             <>
-            {this.props.loggedIn ? <div className="subActions"><button type="button" className="navButton" onClick={this.newReceiptToggle}>New Receipt</button></div> 
+            {this.props.loggedIn ? <div className="subActions"><button type="button" id="newReceipt" className="navButton" onClick={this.newReceiptToggle}>New Receipt</button></div> 
             : this.props.loaded ? initialInfo : ''}
             {this.state.newReceipt ? <NewReceipt newReceiptToggle={this.newReceiptToggle} fetchReceipts={this.fetchReceipts}></NewReceipt> : ''}
             {receipts}
