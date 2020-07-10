@@ -74,13 +74,13 @@ class Receipt extends React.Component {
     render() {
         return(
             <div className="container">
-                <h1>{this.state.name}</h1>
                 <div className="actions">
                     <span id="save" hidden={!this.state.editMode} role="img" aria-label="save" onClick={this.saveReceipt}><FontAwesomeIcon className="icon" icon={faCheck}/></span>
                     <span hidden={this.state.editMode} role="img" aria-label="edit" onClick={this.switchMode}><FontAwesomeIcon className="icon" icon={faEdit}/></span>
-                    <span ><a  href={this.state.image_url} target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className="icon" icon={faImage}/></a></span>
+                    <span><a  href={this.state.image_url} target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className="icon" icon={faImage}/></a></span>
                     <span id="delete" role="img" aria-label="delete" onClick={this.deleteReceipt}><FontAwesomeIcon className="icon" icon={faTrash}/></span>
                 </div>
+                <h1>{this.state.name}</h1>
                 <div hidden={this.state.editMode} className="receiptDetails"> 
                     <ul>
                         <li><b>Name:</b> {this.state.name}</li>

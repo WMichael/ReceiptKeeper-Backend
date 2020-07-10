@@ -59,13 +59,27 @@
   box-shadow: none;
 }
 
+@media screen and (max-width: 530px) {
+  .navButton {
+    width: 34%;
+    height: 50px;
+    margin: 5px 5px;
+  }
+}
+
+@media screen and (min-width: 530px) {
+  nav {
+    margin: 15px;
+  }
+}
+
 .login {
   text-align: center;
 }
 
 nav {
-  margin: 15px;
-  height: 35px;
+  margin-bottom: 15px;
+  height: auto;
 }
 
 .subActions {
