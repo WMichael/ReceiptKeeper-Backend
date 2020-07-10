@@ -29,6 +29,7 @@ passport.use(
           new UserModel({
             username: profile.displayName,
             googleid: profile.id,
+            role: 'user'
           })
             .save()
             .then((newUser) => {
