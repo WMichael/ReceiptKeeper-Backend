@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../styles/receipt.scss";
+import "../../styles/main.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
@@ -53,23 +54,23 @@ class NewReceipt extends React.Component {
 
     render(){
         return(
-            <div className="receiptContainer">
+            <div className="container">
                 <h1>{this.state.name}</h1>
                 <div className="actions">
                     <span id="save" role="img" aria-label="save" onClick={this.saveReceipt}><FontAwesomeIcon className="icon" icon={faCheck}/></span>
                 </div>
                 <div className="receiptDetails">
                     <form>
-                        <label><b>Name:</b> </label>
+                        <label id="nameLbl"><b>Name:</b> </label>
                         <input type="text" name="name" value={this.state.name} onChange={this.handleChange} /> <br/>
-                        <label><b>Description:</b> </label>
+                        <label id="descriptionLbl"><b>Description:</b> </label>
                         <input type="text" name="description" value={this.state.description} onChange={this.handleChange} /><br/>
-                        <label><b>Price:</b> </label>
+                        <label id="priceLbl"><b>Price:</b> </label>
                         <input type="text" name="price" value={this.state.price} onChange={this.handleChange} /> <br/>
-                        <label><b>Image Url:</b> </label>
+                        <label id="imageUrlLbl"><b>Image Url:</b> </label>
                         <input type="text" name="image_url" value={this.state.image_url} onChange={this.handleChange} /> <br/>
-                        <label><b>Purchase Date:</b> </label>
-                        <DatePicker dateFormat="dd/MM/yyyy" selected={this.state.purchase_date} onChange={this.handleDateChange}/>
+                        <label id="purchaseDateLbl"><b>Purchase Date:</b> </label>
+                        <DatePicker dateFormat="dd/MM/yyyy" name="purchaseDate" selected={this.state.purchase_date} onChange={this.handleDateChange}/>
                     </form>
                 </div>
             </div>

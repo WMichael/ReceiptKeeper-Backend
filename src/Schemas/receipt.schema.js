@@ -7,7 +7,11 @@ const ReceiptSchema = new mongoose.Schema({
     description: String,
     image_url: String,
     price: Number,
-    purchase_date: Date
+    purchase_date: Date,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 }, {collection: 'receipts'});
 
 module.exports = ReceiptSchema;

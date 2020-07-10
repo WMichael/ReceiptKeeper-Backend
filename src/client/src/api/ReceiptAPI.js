@@ -3,7 +3,7 @@ const API_URL = process.env.NODE_ENV === 'production' ? '' : process.env.REACT_A
 
 export const ReceiptApi = {
     all: () => {
-        return fetch(`${API_URL}/receipts`).then(res => res.json());
+        return fetch(`${API_URL}/receipts`, {credentials: "include"}).then(res => res.json());
     },
     save: (body) => {
         return fetch(`${API_URL}/receipts/add`, {
@@ -11,12 +11,14 @@ export const ReceiptApi = {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: "include"
         }).then(res => res.json());
     },
     delete: (id) => {
         return fetch(`${API_URL}/receipts/${id}`, {
             method: 'DELETE',
+            credentials: "include"
         }).then(res => res.json());
     },
     update: (id, body) => {
@@ -25,7 +27,8 @@ export const ReceiptApi = {
             headers: {
                 'Content-type' : 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: "include"
         }).then(res => res.json());
     }
 }

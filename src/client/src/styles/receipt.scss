@@ -1,19 +1,5 @@
 @import "theme.scss";
 
-.receiptContainer {
-    background-color: $secondary-colour;
-    color: white;
-    width: 500px;
-    max-width: 500px;
-    padding: 2px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    display: block;
-    min-height: 175px;
-}
-
 .actions {
     float: right;
     font-size: 1.5rem;
@@ -23,7 +9,7 @@
 }
 
 .actions a:link, a:visited, a:hover, a:active {
-    color: white;
+    color: $text-colour;
 }
 
 .actions span {
@@ -60,4 +46,11 @@
 
 h1 { 
     display: inline;
+    padding: 15px;
+}
+
+@media screen and (max-width: 530px) {
+    h1 {
+        display: block;
+    }
 }
